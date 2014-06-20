@@ -1,6 +1,13 @@
 /**
  * Copyright (c) 2014 Nathan Clack, All Rights Reserved
  */
+
+function usage() {
+  return "Runs <command> when a file under <path> is changed.\n"+
+         "Usage: node watch.js <path> <command>\n\n"+
+         "       Change settings in watch.js to configure."
+}
+ 
 var fs   = require('fs'),
     path = require('path'),
     cp   = require('child_process');
@@ -68,10 +75,6 @@ walk(process.argv[2],function fire(evt,filename) {
 });
 
 
-function usage() {
-  return "Usage: node watch.js <path> <command>\n\n"+
-         "       Change settings in watch.js to configure."
-}
 
 /* Notes
 [1]: Some editors replace the file on write so that the old
