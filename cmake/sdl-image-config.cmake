@@ -31,9 +31,18 @@ elseif(APPLE)
   set(SDL_IMAGE_LIBRARIES ${SDL_IMAGE_LIBRARY})
 endif()
 
-## Utility: Copy DLL to target
-function(copy_sdl_image_to_target tgt)
+## TARGET_ADD_SDL_IMAGE
+# Usage: target_add_sdl_image(target [INSTALL])
+# 
+# If INSTALL is found, then any required shared libraries will be installed
+# alongside the target.
+function(target_add_sdl_image tgt)
   set(opts ${ARGN})
+  
+  # basic configuration
+  target_include_directories(${tgt} PRIVATE ${SDL_IMAGE_INCLUDE_DIRS})
+  target_link_libraries(${tgt} ${SDL_IMAGE_LIBRARIES})
+  
   if(SDL2_IMAGE_USE_SHARED)
     file(GLOB libs ${SDL_IMAGE_LIB_DIR}/*${CMAKE_SHARED_LIBRARY_SUFFIX})
     foreach(lib ${libs})

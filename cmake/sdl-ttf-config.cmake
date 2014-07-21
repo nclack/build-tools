@@ -32,9 +32,18 @@ elseif(APPLE)
   set(SDL_TTF_LIBRARIES ${SDL_TTF_LIBRARY})
 endif()
 
-## Utility: Copy DLL to target
-function(copy_sdl_ttf_to_target tgt)
+## TARGET_ADD_SDL_TTF
+# Usage: target_add_sdl_ttf(target [INSTALL])
+# 
+# If INSTALL is found, then any required shared libraries will be installed
+# alongside the target.
+function(target_add_sdl_ttf tgt)
   set(opts ${ARGN})
+  
+  # basic configuration
+  target_include_directories(${tgt} PRIVATE ${SDL_TTF_INCLUDE_DIRS})
+  target_link_libraries(${tgt} ${SDL_TTF_LIBRARIES})
+
   if(SDL2_TTF_USE_SHARED)
     file(GLOB libs ${SDL_TTF_LIB_DIR}/*${CMAKE_SHARED_LIBRARY_SUFFIX})    
     foreach(lib ${libs})
