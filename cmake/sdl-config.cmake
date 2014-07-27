@@ -3,7 +3,7 @@ include(FindPackageHandleStandardArgs)
 
 ## External Project
 if(MSVC)
-  set(url http://www.libsdl.org/release/SDL2-devel-2.0.0-VC.zip)
+  set(url http://www.libsdl.org/release/SDL2-devel-2.0.3-VC.zip)
   if(NOT TARGET libsdl2)
     ExternalProject_Add(libsdl2 URL ${url} CONFIGURE_COMMAND "" BUILD_COMMAND "" INSTALL_COMMAND "")
     set_target_properties(libsdl2 PROPERTIES FOLDER ExternalProjects)
@@ -36,7 +36,7 @@ elseif(APPLE)
   set(SDL_LIBRARIES ${SDL_LIBRARY})
 endif()
 
-## TARgET_aDD_SDL
+## TARGET_ADD_SDL
 # Usage: target_add_sdl(target [INSTALL])
 # 
 # If INSTALL is found, then any required shared libraries will be installed
