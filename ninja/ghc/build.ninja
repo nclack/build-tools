@@ -1,0 +1,12 @@
+builddir  = build
+hidir     = $builddir/ghc/hi
+odir      = $builddir/ghc/obj 
+stubdir   = $builddir/ghc/stub 
+dumpdir   = $builddir/ghc/dump 
+
+hsdirs = -hidir $hidir -odir $odir -stubdir $stubdir -dumpdir $dumpdir
+
+rule haskell
+    command = ghc $hsdirs -o $builddir/$out $in
+
+build hw: haskell main.hs
